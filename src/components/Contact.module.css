@@ -1,0 +1,276 @@
+.contact {
+  padding: 90px 0;
+  background: linear-gradient(180deg, #f8f5f9 0%, #ffffff 100%);
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.header h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: #1f1f1f;
+  margin: 0 0 12px;
+  letter-spacing: -0.5px;
+}
+
+.header p {
+  font-size: 17px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Main Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Left Info Box */
+.info {
+  background: linear-gradient(135deg, #66116f 0%, #7b1785 100%);
+  border-radius: 24px;
+  padding: 36px 30px;
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(102, 17, 111, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.info::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: -50px;
+  right: -50px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.info::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  bottom: -35px;
+  left: -35px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+}
+
+.info h2 {
+  position: relative;
+  z-index: 1;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.info > p {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 30px;
+  max-width: 320px;
+}
+
+.details {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 14px 16px;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+}
+
+.item span {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #66116f;
+  border-radius: 12px;
+  font-size: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.item p {
+  margin: 0;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Form Box */
+.form {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 34px 30px;
+  border: 1px solid #ece7ef;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d8d5dd;
+  border-radius: 14px;
+  outline: none;
+  font-size: 15px;
+  color: #1f2937;
+  background: #fcfbfd;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.inputGroup input::placeholder,
+.inputGroup textarea::placeholder {
+  color: #9ca3af;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #66116f;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(102, 17, 111, 0.08);
+}
+
+.inputGroup textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 15px 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #66116f 0%, #7b1785 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 14px 30px rgba(102, 17, 111, 0.2);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px rgba(102, 17, 111, 0.28);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .header h1 {
+    font-size: 36px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info,
+  .form {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact {
+    padding: 70px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .header h1 {
+    font-size: 30px;
+  }
+
+  .header p {
+    font-size: 15px;
+  }
+
+  .info h2 {
+    font-size: 24px;
+  }
+
+  .item {
+    padding: 12px 14px;
+  }
+
+  .item span {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 18px;
+  }
+
+  .form {
+    padding: 24px 18px;
+  }
+
+  .inputGroup input,
+  .inputGroup textarea {
+    font-size: 14px;
+    padding: 13px 14px;
+  }
+
+  .btn {
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+}

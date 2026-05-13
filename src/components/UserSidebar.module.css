@@ -1,0 +1,115 @@
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 40;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid #ece7ef;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  transform: translateX(-100%);
+  transition: 0.3s ease;
+}
+
+.open {
+  transform: translateX(0);
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .sidebar {
+    position: sticky;
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: none;
+  }
+}
+
+/* Brand */
+.brand {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  border-bottom: 1px solid #f1edf3;
+}
+
+.brand h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+/* Nav */
+.nav {
+  flex: 1;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Nav Item */
+.navItem {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* Hover */
+.navItem:hover {
+  background: #f6eef8;
+  color: #66116f;
+}
+
+/* Active */
+.active {
+  background: linear-gradient(135deg, #66116f, #7b1785);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(102, 17, 111, 0.18);
+}
+
+/* Footer */
+.footer {
+  padding: 16px;
+  border-top: 1px solid #ece7ef;
+}
+
+/* Logout */
+.logout {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #f0d7d9;
+  background: #fff5f5;
+  color: #c0392b;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.logout:hover {
+  background: #ffeaea;
+}

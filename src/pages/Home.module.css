@@ -1,0 +1,179 @@
+.home {
+  background: #f8fafc;
+}
+
+/* COMMON */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* WHY SECTION */
+.whySection {
+  padding: 90px 0;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #66116f;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.desc {
+  font-size: 16px;
+  color: #64748b;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* CARD */
+.card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-color: #66116f20;
+}
+
+.iconBox {
+  width: 56px;
+  height: 56px;
+  background: #f4eefe;
+  color: #66116f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* CTA */
+.cta {
+  background: #66116f;
+  padding: 90px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.ctaContent h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.ctaContent p {
+  color: #cbd5f5;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* BUTTONS */
+.ctaBtns {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  padding: 14px 26px;
+  background: white;
+  color: #66116f;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.primaryBtn:hover {
+  background: #7a1784;
+}
+
+.secondaryBtn {
+  padding: 14px 26px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.secondaryBtn:hover {
+  background: #334155;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .ctaContent h2 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 576px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaContent h2 {
+    font-size: 26px;
+  }
+
+  .ctaBtns {
+    flex-direction: column;
+  }
+}
