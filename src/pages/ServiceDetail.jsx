@@ -185,7 +185,7 @@ export default function ServiceDetail() {
             </div>
 
             <div className={styles.promiseCard}>
-              <h3 className={styles.promiseTitle}>UC Promise</h3>
+              <h3 className={styles.promiseTitle}>Zan Zee Promise</h3>
               
               <div className={styles.promiseList}>
                 <div className={styles.promiseItem}>

@@ -89,7 +89,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className={styles.logo}>
           <div className={styles.logoIcon}>Z</div>
-          <span className={styles.logoText}>Zanzee</span>
+          <span className={styles.logoText}>Zan Zee</span>
         </Link>
 
         {/* Search Bar (Desktop) */}
