@@ -51,17 +51,17 @@ export default function ServiceDetail() {
     {
       id: "video1",
       title: "Fast Home Repair Tips",
-      src: "https://www.youtube.com/embed/jpb148s94Jw"
+      src: "https://www.youtube.com/embed/dEPXeBn79Bk?si=XAd1q0LGidWXk_po"
     },
     {
       id: "video2",
       title: "Smart Maintenance Tricks",
-      src: "https://www.youtube.com/embed/2g7MY5sD3eQ"
+      src: "https://www.youtube.com/embed/42cMv2jjSoE?si=8CwNRhmFGurPqSE-" 
     },
     {
       id: "video3",
       title: "Quality Service Guide",
-      src: "https://www.youtube.com/embed/MmcdhVU0qNU"
+      src: "https://www.youtube.com/embed/uLwBMvKxXpU?si=v6DfPYi2cneaH_2t" 
     }
   ];
 
@@ -216,14 +216,15 @@ export default function ServiceDetail() {
                   <div key={video.id} className={styles.videoCard}>
                     <div className={styles.videoBadge}>▶</div>
                     <div className={styles.videoWrapper}>
+                  
                       <iframe
-                        className={styles.videoIframe}
-                        src={video.src}
-                        title={video.title}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
+  className={styles.videoIframe}
+  src={video.src}
+  title={video.title}
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+/>
                     </div>
                     <p className={styles.videoCaption}>{video.title}</p>
                   </div>
