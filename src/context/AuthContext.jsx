@@ -8,8 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser]       = useState(() => JSON.parse(localStorage.getItem("zanzeeUser") || "null"));
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(null);
+  const [pendingEmail, setPendingEmail] = useState(null);
 
-  // Persist user to localStorage
   useEffect(() => {
     if (user) localStorage.setItem("zanzeeUser", JSON.stringify(user));
     else localStorage.removeItem("zanzeeUser");
@@ -19,9 +19,34 @@ export const AuthProvider = ({ children }) => {
     setLoading(true); setError(null);
     try {
       const res = await api.post("/auth/signup", data);
+      setPendingEmail(data.email);
       return res.data;
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
+      throw err;
+    } finally { setLoading(false); }
+  };
+
+  const verifyEmail = async (email, otp, signupData) => {
+    setLoading(true); setError(null);
+    try {
+      const res = await api.post("/auth/verify-email", { email, otp, ...signupData });
+      setUser(res.data);
+      setPendingEmail(null);
+      return res.data;
+    } catch (err) {
+      setError(err.response?.data?.message || "Verification failed");
+      throw err;
+    } finally { setLoading(false); }
+  };
+
+  const resendOTP = async (email) => {
+    setLoading(true); setError(null);
+    try {
+      const res = await api.post("/auth/resend-otp", { email });
+      return res.data;
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to resend code");
       throw err;
     } finally { setLoading(false); }
   };
@@ -40,29 +65,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => setUser(null);
 
-  const verifyEmail = async (data) => {
-    setLoading(true); setError(null);
-    try {
-      const res = await api.post("/auth/verify-email", data);
-      setUser(res.data);
-      return res.data;
-    } catch (err) {
-      setError(err.response?.data?.message || "Verification failed");
-      throw err;
-    } finally { setLoading(false); }
-  };
-
-  const resendOTP = async (data) => {
-    setLoading(true); setError(null);
-    try {
-      const res = await api.post("/auth/resend-otp", data);
-      return res.data;
-    } catch (err) {
-      setError(err.response?.data?.message || "Failed to resend code");
-      throw err;
-    } finally { setLoading(false); }
-  };
-
   const updateProfile = async (data) => {
     setLoading(true);
     try {
@@ -73,7 +75,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, error, signup, login, logout, verifyEmail, resendOTP, updateProfile, setError }}>
+    <AuthContext.Provider value={{ user, loading, error, signup, verifyEmail, resendOTP, login, logout, updateProfile, setError, pendingEmail, setPendingEmail }}>
       {children}
     </AuthContext.Provider>
   );
