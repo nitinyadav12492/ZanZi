@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
+      console.debug("auth login -> POST", api.defaults.baseURL + "/auth/login", data?.email || data?.username);
       const res = await api.post("/auth/login", data);
       setUser(res.data);
       return res.data;
