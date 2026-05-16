@@ -63,7 +63,10 @@ export const AuthProvider = ({ children }) => {
     } finally { setLoading(false); }
   };
 
-  const logout = () => setUser(null);
+  const logout = () => {
+    localStorage.removeItem("zanzeeUser");
+    setUser(null);
+  };
 
   const updateProfile = async (data) => {
     setLoading(true);

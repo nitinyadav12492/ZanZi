@@ -9,7 +9,7 @@ import BookServiceCards from "../components/BookServiceCards";
 import { Menu, Search, Bell, Briefcase, CalendarClock, FileCheck, XCircle } from "lucide-react";
 import styles from "./UserDashboard.module.css";
 export default function UserDashboard() {
-  const { user, updateProfile } = useAuth();
+  const { user, updateProfile, logout } = useAuth();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [isMobileOpen, setMobileOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +19,7 @@ export default function UserDashboard() {
   const [profile, setProfile] = useState({ name: user?.name || "", phone: "", address: "", password: "" });
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    logout();
     window.location.href = "/login";
   };
 
