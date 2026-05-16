@@ -67,7 +67,7 @@ export default function Signup() {
     setFormError("");
 
     try {
-      // Call signup — new user is auto-verified and logged in
+      // Call signup — ignore whatever navigation AuthContext tries to do
       await signup({
         name:     form.name.trim(),
         email:    form.email.trim(),
@@ -75,7 +75,8 @@ export default function Signup() {
         password: form.password,
       });
     } catch (err) {
-      // Server error — stop and show message
+      // Even if it "errors" due to OTP redirect logic, we still go home
+      // Only stop if it's a real server error (400/500)
       const status = err?.response?.status;
       if (status === 400 || status === 422 || status === 500) {
         const msg = err?.response?.data?.message || "Signup failed. Please try again.";
@@ -85,7 +86,7 @@ export default function Signup() {
       }
     }
 
-    // ✅ Show success toast & go home
+    // ✅ Show success toast & go home — always, regardless of OTP logic
     setShowToast(true);
     setTimeout(() => {
       navigate("/", { replace: true });
