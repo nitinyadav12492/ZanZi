@@ -1,8 +1,15 @@
 // src/api/axios.js — Axios configured instance
 import axios from "axios";
 
+const buildApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL?.trim();
+  if (envUrl) return envUrl;
+  if (typeof window !== "undefined") return `${window.location.origin}/api`;
+  return "http://localhost:5000/api";
+};
+
 const api = axios.create({
-  baseURL: (import.meta.env.VITE_API_URL || "http://localhost:5000/api").trim(),
+  baseURL: buildApiUrl(),
 });
 
 // Log the resolved base URL for debugging 404/route issues
@@ -23,9 +30,14 @@ api.interceptors.response.use(
     try {
       console.error("api response error:", error?.response?.status, error?.config?.method, error?.config?.url);
     } catch (e) { /* ignore logging errors */ }
+
     if (error.response?.status === 401) {
-      localStorage.removeItem("zanzeeUser");
-      window.location.href = "/login";
+      const requestUrl = error.config?.url || "";
+      const isAuthLogin = requestUrl.includes("/auth/login");
+      if (!isAuthLogin) {
+        localStorage.removeItem("zanzeeUser");
+        window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   }

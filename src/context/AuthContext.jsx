@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("zanzeeUser") || "null"));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [pendingEmail, setPendingEmail] = useState(null);
 
   useEffect(() => {
     if (user) localStorage.setItem("zanzeeUser", JSON.stringify(user));
@@ -20,40 +19,10 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const res = await api.post("/auth/signup", data);
-      setPendingEmail(data.email);
+      setUser(res.data);
       return res.data;
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const verifyEmail = async (email, otp, signupData) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await api.post("/auth/verify-email", { email, otp, ...signupData });
-      setUser(res.data);
-      setPendingEmail(null);
-      return res.data;
-    } catch (err) {
-      setError(err.response?.data?.message || "Verification failed");
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const resendOTP = async (email) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await api.post("/auth/resend-otp", { email });
-      return res.data;
-    } catch (err) {
-      setError(err.response?.data?.message || "Failed to resend OTP");
       throw err;
     } finally {
       setLoading(false);
@@ -99,11 +68,7 @@ export const AuthProvider = ({ children }) => {
         loading,
         error,
         setError,
-        pendingEmail,
-        setPendingEmail,
         signup,
-        verifyEmail,
-        resendOTP,
         login,
         logout,
         updateProfile,
