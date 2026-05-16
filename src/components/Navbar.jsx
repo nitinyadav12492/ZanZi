@@ -142,7 +142,7 @@ export default function Navbar() {
               <>
                 <Link to={user.role === "admin" ? "/admin" : "/dashboard"} className={styles.userBtn}>
                   <User size={16} />
-                  <span>{user.name.split(" ")[0]}</span>
+                  <span>{user.name?.split(" ")[0] || "User"}</span>
                 </Link>
                 <button onClick={handleLogout} className={styles.logoutBtn}>
                   Logout
@@ -214,10 +214,10 @@ export default function Navbar() {
               <>
                 <div style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', padding: '0 8px'}}>
                   <div style={{width: '36px', height: '36px', borderRadius: '50%', background: '#eef2ff', color: '#4338ca', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold'}}>
-                    {user.name.charAt(0)}
+                    {user.name?.charAt(0) || 'U'}
                   </div>
                   <div>
-                    <div style={{fontSize: '14px', fontWeight: 'bold'}}>{user.name}</div>
+                    <div style={{fontSize: '14px', fontWeight: 'bold'}}>{user.name || 'User'}</div>
                     <div style={{fontSize: '12px', color: '#6b7280'}}>{user.email || 'User'}</div>
                   </div>
                 </div>
