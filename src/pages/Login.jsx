@@ -15,7 +15,9 @@ export default function Login() {
     try {
       await login(form);
       navigate("/");
-    } catch {}
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -31,9 +33,9 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email Address</label>
-            <input name="email" type="email" className="form-control" required
-              value={form.email} onChange={handleChange} placeholder="you@example.com" />
+            <label>Email address or username</label>
+            <input name="email" type="text" className="form-control" required
+              value={form.email} onChange={handleChange} placeholder="you@example.com or username" />
           </div>
           <div className="form-group">
             <label>Password</label>
