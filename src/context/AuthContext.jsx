@@ -70,7 +70,6 @@ export const AuthProvider = ({ children }) => {
         setError,
         signup,
         login,
-        login,
         logout,
         updateProfile,
       }}

@@ -3,43 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-function Toast({ message, onClose }) {
-  return (
-    <>
-      <style>{`
-        @keyframes toastIn {
-          from { opacity: 0; transform: translateY(-20px) scale(0.95); }
-          to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-      `}</style>
-      <div style={{
-        position: "fixed", top: "20px", left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 99999,
-        background: "#1D9E75",
-        color: "#fff",
-        padding: "14px 24px",
-        borderRadius: "50px",
-        boxShadow: "0 8px 30px rgba(29,158,117,0.4)",
-        display: "flex", alignItems: "center", gap: "10px",
-        fontSize: "15px", fontWeight: 600,
-        animation: "toastIn 0.3s ease",
-        whiteSpace: "nowrap",
-      }}>
-        <span style={{ fontSize: "20px" }}>🎉</span>
-        {message}
-        <button onClick={onClose} style={{
-          background: "rgba(255,255,255,0.25)", border: "none",
-          color: "#fff", borderRadius: "50%", width: "22px", height: "22px",
-          cursor: "pointer", fontSize: "13px", marginLeft: "4px",
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>✕</button>
-      </div>
-    </>
-  );
-}
-
 export default function Signup() {
   const { signup, loading, setError } = useAuth();
   const navigate = useNavigate();
@@ -47,7 +10,6 @@ export default function Signup() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", password: "", confirm: "" });
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [showToast, setShowToast] = useState(false);
 
   const handleChange = (e) => {
     if (setError) setError(null);
@@ -67,16 +29,15 @@ export default function Signup() {
     setFormError("");
 
     try {
-      // Call signup — ignore whatever navigation AuthContext tries to do
       await signup({
         name:     form.name.trim(),
         email:    form.email.trim(),
         phone:    form.phone.trim(),
         password: form.password,
       });
+      navigate("/", { replace: true });
+      return;
     } catch (err) {
-      // Even if it "errors" due to OTP redirect logic, we still go home
-      // Only stop if it's a real server error (400/500)
       const status = err?.response?.status;
       if (status === 400 || status === 422 || status === 500) {
         const msg = err?.response?.data?.message || "Signup failed. Please try again.";
@@ -86,11 +47,7 @@ export default function Signup() {
       }
     }
 
-    // ✅ Show success toast & go home — always, regardless of OTP logic
-    setShowToast(true);
-    setTimeout(() => {
-      navigate("/", { replace: true });
-    }, 1800);
+    setSubmitting(false);
   };
 
   const isLoading = loading || submitting;
@@ -98,12 +55,6 @@ export default function Signup() {
   return (
     <div style={styles.page}>
 
-      {showToast && (
-        <Toast
-          message={`Welcome, ${form.name.split(" ")[0] || "there"}! Signup successful`}
-          onClose={() => setShowToast(false)}
-        />
-      )}
 
       <div style={styles.card}>
         <div style={styles.header}>
