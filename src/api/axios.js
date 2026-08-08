@@ -1,13 +1,19 @@
 // src/api/axios.js — Axios configured instance
 import axios from "axios";
 
+const normalizeApiUrl = (url) => {
+  if (!url) return url;
+  const trimmed = url.trim().replace(/\/$/, "");
+  return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+};
+
 const buildApiUrl = () => {
-  const envUrl = import.meta.env.VITE_API_URL?.trim();
-  const baseUrl = import.meta.env.VITE_BASE_URL?.trim();
+  const envUrl = normalizeApiUrl(import.meta.env.VITE_API_URL);
+  const baseUrl = normalizeApiUrl(import.meta.env.VITE_BASE_URL);
   const isLocalDev = typeof window !== "undefined" && import.meta.env.DEV && ["localhost", "127.0.0.1"].includes(window.location.hostname);
 
   if (envUrl) return envUrl;
-  if (baseUrl) return `${baseUrl.replace(/\/$/, "")}/api`;
+  if (baseUrl) return baseUrl;
   if (isLocalDev) return "http://localhost:5000/api";
   if (typeof window !== "undefined") return `${window.location.origin}/api`;
   return "http://localhost:5000/api";
