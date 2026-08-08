@@ -3,6 +3,8 @@ import axios from "axios";
 
 const buildApiUrl = () => {
   const envUrl = import.meta.env.VITE_API_URL?.trim();
+  const isLocalDev = typeof window !== "undefined" && import.meta.env.DEV && ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  if (isLocalDev) return "http://localhost:5000/api";
   if (envUrl) return envUrl;
   if (typeof window !== "undefined") return `${window.location.origin}/api`;
   return "http://localhost:5000/api";

@@ -64,7 +64,7 @@ export default function CategoryHighlightSection() {
           {categories.map((item) => (
             <Link to={item.link} key={item.id} className={styles.card}>
               <div className={styles.imageWrap}>
-                <img src={item.img} alt={item.title} className={styles.image} />
+                <img src={item.img} alt={item.title} className={styles.image} loading="lazy" />
                 <div className={styles.overlay}></div>
                 <div className={styles.badge}>{item.title}</div>
               </div>
@@ -84,6 +84,8 @@ export default function CategoryHighlightSection() {
                       muted
                       loop
                       playsInline
+                      preload="none"
+                      poster={item.img}
                     />
                   </div>
                 ))}

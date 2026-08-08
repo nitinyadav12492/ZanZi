@@ -157,6 +157,8 @@ export default function Hero() {
         muted
         loop
         playsInline
+        preload="none"
+        poster="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80"
       >
         <source src="1115153_Arab_man_Cleaning_3840x2160.mp4" type="video/mp4" />
         {/* Replace above src with your own video URL */}

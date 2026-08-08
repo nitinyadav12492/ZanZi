@@ -38,16 +38,11 @@ export default function Signup() {
       navigate("/", { replace: true });
       return;
     } catch (err) {
-      const status = err?.response?.status;
-      if (status === 400 || status === 422 || status === 500) {
-        const msg = err?.response?.data?.message || "Signup failed. Please try again.";
-        setFormError(msg);
-        setSubmitting(false);
-        return;
-      }
+      const msg = err?.response?.data?.message || err?.message || "Signup failed. Please try again.";
+      setFormError(msg);
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitting(false);
   };
 
   const isLoading = loading || submitting;

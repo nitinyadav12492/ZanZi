@@ -140,7 +140,7 @@ export default function ServiceDetail() {
                     </div>
 
                     <div className={styles.serviceAction}>
-                      <img src={svc.img} alt={svc.name} className={styles.serviceImage} />
+                      <img src={svc.img} alt={svc.name} className={styles.serviceImage} loading="lazy" />
                       
                       {qty === 0 ? (
                         <button className={styles.addButton} onClick={() => updateQty(svc, 1)}>
@@ -222,6 +222,7 @@ export default function ServiceDetail() {
   src={video.src}
   title={video.title}
   frameBorder="0"
+  loading="lazy"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowFullScreen
 />
