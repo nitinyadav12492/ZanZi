@@ -11,9 +11,11 @@ const buildApiUrl = () => {
   const envUrl = normalizeApiUrl(import.meta.env.VITE_API_URL);
   const baseUrl = normalizeApiUrl(import.meta.env.VITE_BASE_URL);
   const isLocalDev = typeof window !== "undefined" && import.meta.env.DEV && ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  const host = typeof window !== "undefined" ? window.location.hostname : "";
 
   if (envUrl) return envUrl;
   if (baseUrl) return baseUrl;
+  if (host === "zan-zi-green.vercel.app") return "https://zanzi-backend-1.onrender.com/api";
   if (isLocalDev) return "http://localhost:5000/api";
   if (typeof window !== "undefined") return `${window.location.origin}/api`;
   return "http://localhost:5000/api";
